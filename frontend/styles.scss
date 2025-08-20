@@ -1,0 +1,38 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin-top: 50px;
+  background-color: rgb(132, 71, 141);
+  color: aliceblue;
+
+  #title {
+    font-size: 30px;
+    margin-bottom: 100px;
+  }
+
+  .description {
+    font-size: 20px;
+  }
+
+  #zodiacForm {
+    margin: 100px auto;
+    width: 150px;
+    padding: 50px 200px;
+    border: 2px solid black;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .zodiacForm-input {
+        width: 200px;
+        margin: 20px;
+        text-align: center;
+    }
+  }
+
+  #result {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+}
