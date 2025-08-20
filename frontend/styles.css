@@ -14,6 +14,8 @@ body .description {
   font-size: 20px;
 }
 body #zodiacForm {
+  background-color: pink;
+  color: blueviolet;
   margin: 100px auto;
   width: 150px;
   padding: 50px 200px;
