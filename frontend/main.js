@@ -37,8 +37,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 var form = document.getElementById("zodiacForm");
 var resultSectn = document.getElementById("result");
-// submit event listener logic
-form.addEventListener('submit', function (event) { return __awaiter(_this, void 0, void 0, function () {
+// submit eventListener logic
+form.addEventListener("submit", function (event) { return __awaiter(_this, void 0, void 0, function () {
     var formData;
     return __generator(this, function (_a) {
         event.preventDefault();
@@ -47,12 +47,44 @@ form.addEventListener('submit', function (event) { return __awaiter(_this, void 
         return [2 /*return*/];
     });
 }); });
-// function that retrieves form data
+// function that gets form data
 var getFormData = function (form) {
-    // uses browser API FormData to read form contents 
+    // instantiate browser API FormData to read form contents with .get method
     var formInfo = new FormData(form);
+    // returns form content needed as an object, using the name attributes of the inputed data
     return {
-        name: formInfo.get('name'),
-        birthday: formInfo.get('birthday'),
+        name: formInfo.get("name"),
+        birthday: formInfo.get("birthday"),
     };
 };
+// function that sends POST request to backend
+// async because it always returns a Promise
+var submitFormData = function (data) { return __awaiter(_this, void 0, void 0, function () {
+    var response, err_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 5, , 6]);
+                return [4 /*yield*/, fetch("URl", {
+                        method: "POST",
+                        // headers contain metadata like 'Content-Type' that tell server what format body is in
+                        headers: { "Content-Type": "application/json" },
+                        //POST request - the body must be a JSON string not an object in fetch
+                        body: JSON.stringify(data),
+                    })];
+            case 1:
+                response = _a.sent();
+                if (!!response.ok) return [3 /*break*/, 2];
+                throw new Error("Server error: ".concat(response.status));
+            case 2: return [4 /*yield*/, response.json()];
+            case 3: return [2 /*return*/, _a.sent()];
+            case 4: return [3 /*break*/, 6];
+            case 5:
+                err_1 = _a.sent();
+                // catch block handles any errors thrown
+                console.log("The following error occured when submitting form: ".concat(err_1));
+                return [2 /*return*/, { name: '', zodiac: 'Error' }]; // default object
+            case 6: return [2 /*return*/];
+        }
+    });
+}); };
