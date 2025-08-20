@@ -6,8 +6,9 @@ body {
   color: aliceblue;
 
   #title {
-    font-size: 30px;
+    font-size: 50px;
     margin-bottom: 100px;
+    text-shadow: 1px 1px 2px pink;
   }
 
   .description {
@@ -18,14 +19,14 @@ body {
     margin: 100px auto;
     width: 150px;
     padding: 50px 200px;
-    border: 2px solid black;
+    border: 2px solid rgb(142, 102, 176);
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
 
     .zodiacForm-input {
-        width: 200px;
+        width: 350px;
         margin: 20px;
         text-align: center;
     }

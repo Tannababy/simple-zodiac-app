@@ -18,14 +18,14 @@
 
     <form id="zodiacForm">
       <label for="name">Name:</label>
-      <input type="text" class="zodiacForm-input"/>
-      <label for="birthday">Date of Birth (DD-MM-YYY):</label>
-      <input type="date" class="zodiacForm-input"/>
+      <input type="text" id="name" name="name" placeholder="Please enter your name" class="zodiacForm-input" required/>
+      <label for="birthday">Date of Birth:</label>
+      <input type="date" id="birthday" name="birthday" class="zodiacForm-input" required/>
       <label for="country">Country of Birth:</label>
-      <input type="text" class="zodiacForm-input"/>
-      <label for="birthT">Time of Birth:</label>
-      <input type="time" class="zodiacForm-input"/>
-      <input type="submit" name="" id="submitButn">
+      <input type="text" id="country" name="country" placeholder="Please enter the name of the country you were born in" class="zodiacForm-input"/>
+      <label for="birthTime">Time of Birth:</label>
+      <input type="time" id="birthTime" name="birthTime" class="zodiacForm-input"/>
+      <input type="submit"  id="submitButn" value="Find Zodiac">
     </form>
 
     <section id="result"></section>
