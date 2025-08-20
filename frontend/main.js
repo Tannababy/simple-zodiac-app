@@ -37,17 +37,21 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 var form = document.getElementById("zodiacForm");
 var resultSectn = document.getElementById("result");
-// submit eventListener logic
 form.addEventListener("submit", function (event) { return __awaiter(_this, void 0, void 0, function () {
-    var formData;
+    var formData, formResult;
     return __generator(this, function (_a) {
-        event.preventDefault();
-        formData = getFormData(form);
-        console.log(formData);
-        return [2 /*return*/];
+        switch (_a.label) {
+            case 0:
+                event.preventDefault();
+                formData = getFormData(form);
+                return [4 /*yield*/, submitFormData(formData)];
+            case 1:
+                formResult = _a.sent();
+                displayResult(formResult);
+                return [2 /*return*/];
+        }
     });
 }); });
-// function that gets form data
 var getFormData = function (form) {
     // instantiate browser API FormData to read form contents with .get method
     var formInfo = new FormData(form);
@@ -83,8 +87,12 @@ var submitFormData = function (data) { return __awaiter(_this, void 0, void 0, f
                 err_1 = _a.sent();
                 // catch block handles any errors thrown
                 console.log("The following error occured when submitting form: ".concat(err_1));
-                return [2 /*return*/, { name: '', zodiac: 'Error' }]; // default object
+                return [2 /*return*/, { name: "", zodiac: "Error" }]; // default object
             case 6: return [2 /*return*/];
         }
     });
 }); };
+var displayResult = function (formResult) {
+    // changes result Section innterText to display what was sent
+    resultSectn.innerText = "Hi ".concat(formResult.name, ", your zodiac sign is ").concat(formResult.zodiac);
+};

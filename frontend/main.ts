@@ -1,15 +1,14 @@
 const form = document.getElementById("zodiacForm") as HTMLFormElement;
 const resultSectn = document.getElementById("result") as HTMLElement;
 
-// submit eventListener logic
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const formData = getFormData(form);
-  console.log(formData);
+  const formResult = await submitFormData(formData);
+  displayResult(formResult);
 });
 
-// function that gets form data
 const getFormData = (form: HTMLFormElement) => {
   // instantiate browser API FormData to read form contents with .get method
   const formInfo = new FormData(form);
@@ -25,10 +24,9 @@ const getFormData = (form: HTMLFormElement) => {
 // async because it always returns a Promise
 
 const submitFormData = async (data: { name: string; birthday: string }) => {
-
   try {
-      // HTTP request using browser API fetch() takes URL and object
-      // must send object with fetch else it will default to GET request
+    // HTTP request using browser API fetch() takes URL and object
+    // must send object with fetch else it will default to GET request
     const response = await fetch("URl", {
       method: "POST",
       // headers contain metadata like 'Content-Type' that tell server what format body is in
@@ -36,14 +34,21 @@ const submitFormData = async (data: { name: string; birthday: string }) => {
       //POST request - the body must be a JSON string not an object in fetch
       body: JSON.stringify(data),
     });
-      
-      // checks status of request and returns json reponse if ok
-      if (!response.ok) { throw new Error(`Server error: ${response.status}`); }
-      else { return await response.json(); }
 
-  } catch(err) {
-      // catch block handles any errors thrown
-      console.log(`The following error occured when submitting form: ${err}`);
-      return { name: '', zodiac: 'Error' } // default object
+    // checks status of request and returns json reponse if ok
+    if (!response.ok) {
+      throw new Error(`Server error: ${response.status}`);
+    } else {
+      return await response.json();
+    }
+  } catch (err) {
+    // catch block handles any errors thrown
+    console.log(`The following error occured when submitting form: ${err}`);
+    return { name: "", zodiac: "Error" }; // default object
   }
+};
+
+const displayResult = (formResult: { name: string; zodiac: string }) => {
+  // changes result Section innterText to display what was sent
+  resultSectn.innerText = `Hi ${formResult.name}, your zodiac sign is ${formResult.zodiac}`;
 };
