@@ -13,7 +13,12 @@ body #title {
 body .description {
   font-size: 20px;
 }
-body #zodiacForm {
+body #mainContainer {
+  display: flexbox;
+  flex-direction: row;
+  justify-content: center;
+}
+body #mainContainer #zodiacForm {
   background-color: pink;
   color: blueviolet;
   margin: 100px auto;
@@ -25,12 +30,18 @@ body #zodiacForm {
   flex-direction: column;
   align-items: center;
 }
-body #zodiacForm .zodiacForm-input {
+body #mainContainer #zodiacForm .zodiacForm-input {
   width: 350px;
   margin: 20px;
   text-align: center;
 }
-body #result {
+body #mainContainer #zodiacForm .zodiacForm-info {
+  margin-top: 20px;
+  font-size: 10px;
+  font-style: italic;
+}
+body #mainContainer #result {
   font-size: 1.2rem;
   font-weight: bold;
+  border: 2px solid rgb(142, 102, 176);
 }

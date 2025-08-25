@@ -16,19 +16,59 @@
       Input your birthday details below and prepare to be amazed!!
     </p>
 
-    <form id="zodiacForm">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" placeholder="Please enter your name" class="zodiacForm-input" required/>
-      <label for="birthday">Date of Birth:</label>
-      <input type="date" id="birthday" name="birthday" class="zodiacForm-input" required/>
-      <label for="country">Country of Birth:</label>
-      <input type="text" id="country" name="country" placeholder="Please enter the name of the country you were born in" class="zodiacForm-input"/>
-      <label for="birthTime">Time of Birth:</label>
-      <input type="time" id="birthTime" name="birthTime" class="zodiacForm-input"/>
-      <input type="submit"  id="submitButn" value="Find Zodiac">
-    </form>
+    <main id="mainContainer">
+      <form id="zodiacForm">
+        <label for="name">Name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Please enter your name"
+          class="zodiacForm-input"
+          required
+        />
+        <label for="birthday">Date of Birth:</label>
+        <input
+          type="date"
+          id="birthday"
+          name="birthday"
+          class="zodiacForm-input"
+          required
+        />
+        <label for="birthTime">Time of Birth:</label>
+        <input
+          type="time"
+          id="birthTime"
+          name="birthTime"
+          class="zodiacForm-input"
+        />
+        <label for="city">City of Birth:</label>
+        <input
+          type="text"
+          id="city"
+          name="city"
+          placeholder="Please enter the name of the city you were born in"
+          class="zodiacForm-input"
+        />
+        <label for="country">Country of Birth:</label>
+        <input
+          type="text"
+          id="country"
+          name="country"
+          placeholder="Please enter the name of the country you were born in"
+          class="zodiacForm-input"
+        />
 
-    <section id="result"></section>
+        <input type="submit" id="submitButn" value="Find Zodiac" />
+        <p class="zodiacForm-info">
+          (If you don't know the exact time, city and/or country of your birth,
+          your chart won't be as accurate and a default time and location will
+          be used as an estimate.)
+        </p>
+      </form>
+
+      <section id="result"></section>
+    </main>
 
     <script src="main.js"></script>
   </body>

@@ -38,18 +38,13 @@ var _this = this;
 var form = document.getElementById("zodiacForm");
 var resultSectn = document.getElementById("result");
 form.addEventListener("submit", function (event) { return __awaiter(_this, void 0, void 0, function () {
-    var formData, formResult;
+    var formData, splitDate;
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                event.preventDefault();
-                formData = getFormData(form);
-                return [4 /*yield*/, submitFormData(formData)];
-            case 1:
-                formResult = _a.sent();
-                displayResult(formResult);
-                return [2 /*return*/];
-        }
+        event.preventDefault();
+        formData = getFormData(form);
+        splitDate = birthdaySplitter(formData);
+        console.log(splitDate);
+        return [2 /*return*/];
     });
 }); });
 var getFormData = function (form) {
@@ -59,27 +54,41 @@ var getFormData = function (form) {
     return {
         name: formInfo.get("name"),
         birthday: formInfo.get("birthday"),
+        birthTime: formInfo.get("birthTime"),
+        location: formInfo.get("city"),
     };
+};
+var birthdaySplitter = function (formData) {
+    for (var _i = 0, _a = Object.entries(formData); _i < _a.length; _i++) {
+        var _b = _a[_i], key = _b[0], value = _b[1];
+        if (key == 'birthday') {
+            console.log("Birthday is: ".concat(value));
+        }
+    }
 };
 // function that sends POST request to backend
 // async because it always returns a Promise
 var submitFormData = function (data) { return __awaiter(_this, void 0, void 0, function () {
-    var response, err_1;
+    var API_KEY, response, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 5, , 6]);
-                return [4 /*yield*/, fetch("URl", {
+                API_KEY = "";
+                return [4 /*yield*/, fetch("https://json.freeastrologyapi.com/western/planets", {
                         method: "POST",
                         // headers contain metadata like 'Content-Type' that tell server what format body is in
-                        headers: { "Content-Type": "application/json" },
+                        headers: {
+                            "Content-Type": "application/json",
+                            "x-api-key": API_KEY,
+                        },
                         //POST request - the body must be a JSON string not an object in fetch
                         body: JSON.stringify(data),
                     })];
             case 1:
                 response = _a.sent();
                 if (!!response.ok) return [3 /*break*/, 2];
-                throw new Error("Server error: ".concat(response.status));
+                throw new Error("Server at error: ".concat(response.status));
             case 2: return [4 /*yield*/, response.json()];
             case 3: return [2 /*return*/, _a.sent()];
             case 4: return [3 /*break*/, 6];
@@ -87,12 +96,29 @@ var submitFormData = function (data) { return __awaiter(_this, void 0, void 0, f
                 err_1 = _a.sent();
                 // catch block handles any errors thrown
                 console.log("The following error occured when submitting form: ".concat(err_1));
-                return [2 /*return*/, { name: "", zodiac: "Error" }]; // default object
+                return [2 /*return*/, { name: "", zodiac: "Error" }]; // default object so app does not break
             case 6: return [2 /*return*/];
         }
     });
 }); };
 var displayResult = function (formResult) {
     // changes result Section innterText to display what was sent
-    resultSectn.innerText = "Hi ".concat(formResult.name, ", your zodiac sign is ").concat(formResult.zodiac);
+    resultSectn.innerText = "Hi ".concat(formResult.name, ", your sun sign is ").concat(formResult.zodiac, ", your moon sign is ").concat(formResult.zodiac, " and rising sign is ").concat(formResult.zodiac);
 };
+// const dummyData = {
+//   name: "Lotanna",
+//   year: 1994,
+//   month: 10,
+//   date: 5,
+//   hours: 13,
+//   minutes: 10,
+//   seconds: 0,
+//   latitude: 51.5072, //London
+//   longitude: 0.1276,
+//   timezone: 1.0,
+//   config: {
+//     observation_point: "topocentric", // geocentric or topocentric
+//     ayanamsha: "tropical", // tropical or sayana or lahiri
+//     language: "en",
+//   },
+// };
