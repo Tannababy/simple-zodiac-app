@@ -14,7 +14,9 @@ public class BirthDetails {
     private Config config;
 
     // no args constructor
-    public BirthDetails() {}
+    public BirthDetails() {
+        this.config = new Config();
+    }
 
     public int getYear() {
         return year;
