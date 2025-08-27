@@ -38,13 +38,36 @@ var _this = this;
 var form = document.getElementById("zodiacForm");
 var resultSectn = document.getElementById("result");
 form.addEventListener("submit", function (event) { return __awaiter(_this, void 0, void 0, function () {
-    var formData, splitDate;
+    var formData, splitDate, dummyData, formResult;
     return __generator(this, function (_a) {
-        event.preventDefault();
-        formData = getFormData(form);
-        splitDate = birthdaySplitter(formData);
-        console.log(splitDate);
-        return [2 /*return*/];
+        switch (_a.label) {
+            case 0:
+                event.preventDefault();
+                formData = getFormData(form);
+                splitDate = birthdaySplitter(formData);
+                console.log(splitDate);
+                dummyData = {
+                    year: splitDate.year,
+                    month: splitDate.month,
+                    date: splitDate.date,
+                    hours: 10,
+                    minutes: 30,
+                    seconds: 0,
+                    latitude: 17.38405,
+                    longitude: 78.45636,
+                    timezone: 5.5,
+                    config: {
+                        observation_point: "topocentric" /* geocentric or topocentric */,
+                        ayanamsha: "tropical" /*  tropical or sayana or lahiri  */,
+                        language: "en" /* en , te , es , fr , pt , ru , de ,  ja */,
+                    },
+                };
+                return [4 /*yield*/, submitFormData(dummyData)];
+            case 1:
+                formResult = _a.sent();
+                displayResult(formResult);
+                return [2 /*return*/];
+        }
     });
 }); });
 var getFormData = function (form) {
@@ -53,18 +76,15 @@ var getFormData = function (form) {
     // returns form content needed as an object, using the name attributes of the inputed data
     return {
         name: formInfo.get("name"),
-        birthday: formInfo.get("birthday"),
+        birthday: formInfo.get("birthday"), // "1994-08-02"
         birthTime: formInfo.get("birthTime"),
         location: formInfo.get("city"),
     };
 };
 var birthdaySplitter = function (formData) {
-    for (var _i = 0, _a = Object.entries(formData); _i < _a.length; _i++) {
-        var _b = _a[_i], key = _b[0], value = _b[1];
-        if (key == 'birthday') {
-            console.log("Birthday is: ".concat(value));
-        }
-    }
+    var _a = formData.birthday.split("-"), year = _a[0], month = _a[1], date = _a[2];
+    var birthdayObj = { year: year, month: month, date: date };
+    return birthdayObj;
 };
 // function that sends POST request to backend
 // async because it always returns a Promise
@@ -74,6 +94,13 @@ var submitFormData = function (data) { return __awaiter(_this, void 0, void 0, f
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 5, , 6]);
+                // HTTP request using browser API fetch() takes URL and object
+                // must send object with fetch else it will default to GET request
+                // const params = new URLSearchParams({
+                //   birthday: "1995-05-20",
+                //   name: "Lota",
+                // });
+                console.log("POST request body:", JSON.stringify(data));
                 API_KEY = "";
                 return [4 /*yield*/, fetch("https://json.freeastrologyapi.com/western/planets", {
                         method: "POST",
